@@ -2,12 +2,28 @@ import React  from 'react';
 import {BsPeopleCircle, BsFillHeartFill} from 'react-icons/bs';
 import {FaShoppingCart} from 'react-icons/fa';
 
-import { Container, NavBar } from './styles';
+import { Container, NavBar, NavBarResponsiva } from './styles';
 
 import top_logo from "../../Assets/top_logo.png";
 
 const Header: React.FC = () => {
   return (
+    <>
+      <NavBarResponsiva>
+      <ul>
+        <li> 
+          <div className="menu-toggle">
+            <div className="one"></div>
+            <div className="two"></div>
+            <div className="three"></div>
+          </div>
+        </li>
+          <li className="logo"><a href="#"><figure><img src={top_logo} alt="Logo navbar"/></figure></a></li>
+          <li  className="myaccount"><a href="#"><BsPeopleCircle/></a></li>
+          <li  className="itens"><a href="#"><FaShoppingCart/></a></li>    
+        </ul>
+        <div></div>
+      </NavBarResponsiva>
     <Container>
       <NavBar>
         <ul>
@@ -18,7 +34,9 @@ const Header: React.FC = () => {
           <li  className="itens"><a href="#"><FaShoppingCart/>ITENS</a></li>    
         </ul>
       </NavBar>
+
     </Container>
+      </>
   );
 }
 

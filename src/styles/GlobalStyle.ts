@@ -23,8 +23,9 @@ export default createGlobalStyle `
     background:var(--primary);
   }
   :root {
-    /* --white: #fbfcff; */
-    --white: #15202b;
+    --white: #fbfcff;
+    /* --white: #15202b; */
     --sections: #D9D9D9;
+    --orangeWolf: #f7a202;
   }
 `;
