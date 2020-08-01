@@ -12,20 +12,23 @@ export default createGlobalStyle `
     max-width:100vw;
     height:100%;
     width:100%;
-    background:var(--white)
+    background:var(--white);
   }
   *,button,input{
     border:0;
     background:none;
-    font-family: --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: Roboto, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   html{
     background:var(--primary);
   }
   :root {
-    --white: #fbfcff;
+    --white: #e5e5e5;
+    --modalsColor: #fafafa;
     /* --white: #15202b; */
     --sections: #D9D9D9;
     --orangeWolf: #f7a202;
+    --black: black;
+    --fontFooter: #828da3;
   }
 `;

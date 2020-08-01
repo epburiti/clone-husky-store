@@ -30,7 +30,7 @@ export const NavBar = styled.div`
     margin-right: 50px;
   }
   >ul li a figure img{
-    width:90%;
+    width:100%;
     margin: 0 0 0 10px;
   }
    >ul li a,ul li path{
@@ -56,6 +56,13 @@ export const NavBar = styled.div`
     display: flex;
     align-items: center;
     font-size:18px;
+    text-transform:uppercase;
+    color:var(--white);
+    font-weight:500;
+    >span{
+      color:var(--orangeWolf);
+      margin-right:4px;
+    }
   }
   .iconStyle{
     color:white;
@@ -72,10 +79,8 @@ export const NavBar = styled.div`
 `;
 
 export const NavBarResponsiva = styled.div`
- @media(max-width: 1000px){
-    
-      display:block;
-    
+ @media(max-width: 1000px){    
+      display:block;    
   }
   display:none;
   height:10vh;
@@ -138,5 +143,4 @@ export const NavBarResponsiva = styled.div`
   svg{
     margin-bottom: 20px;
   }
-}
 `;

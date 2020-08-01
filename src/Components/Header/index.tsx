@@ -31,11 +31,12 @@ const Header: React.FC = () => {
           <li  className="about"><a href="#">SOBRE NÓS</a></li>
           <li  className="myaccount"><a href="#"><BsPeopleCircle/>MINHA CONTA</a></li>
           <li  className="fav"><a href="#"><BsFillHeartFill/>FAVORITOS</a></li>
-          <li  className="itens"><a href="#"><FaShoppingCart/>ITENS</a></li>    
+          <li  className="itens"><a href="#"><FaShoppingCart/><span>0</span>ITENS</a></li>    
         </ul>
       </NavBar>
 
     </Container>
+    
       </>
   );
 }
