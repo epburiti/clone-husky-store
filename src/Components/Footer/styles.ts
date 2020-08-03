@@ -107,6 +107,10 @@ export const Container = styled.div`
 }
 
 @media(max-width:1000px){
+  footer {
+ 
+    height:100%;
+  }
   .mainDivFooter{
     display:block;
     .logos-footer{
