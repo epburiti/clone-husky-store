@@ -1,16 +1,21 @@
 import React, { useState } from "react";
+import {useDispatch, useSelector, connect } from 'react-redux';
+
 
 import Slider from "@material-ui/core/Slider";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import { BsFilter, BsFillStarFill, BsHeart } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
 
 import { Container, Header, Body, Cards } from "./styles";
 import itens from "../../Assets/itens";
 
+import { updateAmount } from '../../actions/Cart';
+
 const Store: React.FC = () => {
   const [minValue, setMinValue] = useState(734.89);
   const [maxValue, setMaxValue] = useState(2644.87);
+  const cartSize = useSelector(state => state.cart.size)
 
   const handleChange = (event, newValue) => {
     setMinValue(newValue[0]);
@@ -48,6 +53,11 @@ const Store: React.FC = () => {
       height: 8,
     },
   })(Slider);
+
+  const dispatch = useDispatch();
+  const handleAddProduct = (product) =>{
+    dispatch(updateAmount(product.id, product));
+  }
 
   return (
     <Container>
@@ -141,7 +151,7 @@ const Store: React.FC = () => {
                     ou até {element.plots}x de R$ {element.valOfProts} sem juros
                   </p>
                   <div className="card-section">
-                    <button className="button">COMPRAR</button>
+                    <button className="button" onClick={()=>handleAddProduct(element)}>COMPRAR</button>
                     <FaShoppingCart />
                     <BsHeart />
                   </div>
@@ -155,4 +165,4 @@ const Store: React.FC = () => {
   );
 };
 
-export default Store;
+export default connect()(Store);

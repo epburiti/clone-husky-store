@@ -1,12 +1,16 @@
 import React  from 'react';
 import {BsPeopleCircle, BsFillHeartFill} from 'react-icons/bs';
 import {FaShoppingCart} from 'react-icons/fa';
+import {useSelector } from 'react-redux';
+
 
 import { Container, NavBar, NavBarResponsiva } from './styles';
 
 import top_logo from "../../Assets/top_logo.png";
 
 const Header: React.FC = () => {
+  const cartSize = useSelector(state => state.cart.length)
+
   return (
     <>
       <NavBarResponsiva>
@@ -20,7 +24,7 @@ const Header: React.FC = () => {
         </li>
           <li className="logo"><a href="#"><figure><img src={top_logo} alt="Logo navbar"/></figure></a></li>
           <li  className="myaccount"><a href="#"><BsPeopleCircle/></a></li>
-          <li  className="itens"><a href="#"><FaShoppingCart/></a></li>    
+  <li  className="itens"><a href="#"><FaShoppingCart/></a></li>    
         </ul>
         <div></div>
       </NavBarResponsiva>
