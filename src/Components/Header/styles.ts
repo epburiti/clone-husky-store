@@ -82,6 +82,29 @@ export const NavBarResponsiva = styled.div`
  @media(max-width: 1000px){    
       display:block;    
   }
+ @media(max-width: 500px){    
+      >ul{
+        grid-template-columns: 1fr 4fr 1fr 1fr !important;
+        margin-right: 0px !important;
+        >li{
+        /* margin-top:10%; */
+
+        }
+        >li:nth-child(2){
+          margin-right: 20px;
+
+        }
+        svg{
+          font-size: 20px;
+        }
+        img{
+          width: 80% !important;
+        } 
+      }  
+      .menu-toggle{
+        margin: 15px 60px 60px 20px !important;
+      }
+  }
   display:none;
   height:10vh;
   width:100%;
@@ -104,6 +127,7 @@ export const NavBarResponsiva = styled.div`
       list-style: none;
       display: flex;
       align-items: center;
+
      
     } 
     >li:nth-child( n + 3 ) a:hover{

@@ -7,13 +7,15 @@ export const Container = styled.div`
     margin: 12% auto 0 auto;
   }
   @media (max-width: 700px) {
-    margin: 19% auto 0 auto;
+    margin: 29% auto 0 auto;
   }
 `;
 
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
   button {
     background-color: var(--orangeWolf);
     width: 120px;
@@ -71,7 +73,14 @@ export const Header = styled.div`
       div{
         display:none;
       }
+      button{
+        color:var(--modalsColor)
+      }
     }
+  }
+
+  @media (max-width: 600px) {
+   
   }
 `;
 
@@ -123,7 +132,7 @@ export const Body = styled.div`
     justify-content: space-between;
   }
   button:nth-child(1) {
-    background-color: var(--white);
+    background-color: var(--modalsColor);
     color: var(--black);
   }
   button:nth-child(2) {
@@ -168,6 +177,7 @@ export const Body = styled.div`
 `;
 
 export const Cards = styled.section`
+box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 6px;
   cursor: pointer;
   width: 72vw;
   height: 30vh;
@@ -186,7 +196,7 @@ export const Cards = styled.section`
   }
   .button {
     background: var(--orangeWolf) !important;
-    color: var(--white) !important;
+    color: var(--modalsColor) !important;
     cursor: pointer;
   }
 
@@ -246,6 +256,22 @@ export const Cards = styled.section`
       > .preco {
         font-size: 16px !important;
       }
+    }
+  }
+
+  @media (max-width: 600px) {
+    margin: 0 0 4% auto;
+    height: 25vh;
+    .titleAndStars, .stars{
+      display:none;
+    }
+    img{
+      width: 30%;
+    }
+    .div3{
+      width:70%;
+      background-color: white;
+      height:100%;
     }
   }
 `;
