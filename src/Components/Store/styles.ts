@@ -36,7 +36,7 @@ export const Header = styled.div`
   > div {
     background-color: var(--modalsColor);
     width: 40vw;
-    height: 8vh;
+    height: 60px;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -89,6 +89,7 @@ export const Body = styled.div`
     > div:nth-child(1) {
       display: none;
     }
+   
   }
   display: flex;
   > div {
@@ -98,10 +99,11 @@ export const Body = styled.div`
   p {
     margin: 2% auto;
     width: 74%;
+    
   }
   > div:nth-child(1) {
     width: 28vw;
-    height: 36vh;
+    height: 200px;
     background-color: var(--modalsColor);
     border-radius: 10px;
     padding: 10px;
@@ -180,7 +182,7 @@ export const Cards = styled.section`
 box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 6px;
   cursor: pointer;
   width: 72vw;
-  height: 30vh;
+  height: 200px;
   background-color: var(--modalsColor);
   border-radius: 10px;
   /* padding: 20px; */
@@ -229,7 +231,7 @@ box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 6px;
     }
   }
   .div3 {
-    height: 30vh;
+    height: 100%;
     width: 18vw;
     background-color: #ececec;
     border-radius: 10px;
@@ -254,8 +256,28 @@ box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 6px;
     .div3 {
       width: 30vw;
       > .preco {
-        font-size: 16px !important;
+        font-size: 12px !important;
       }
+    }
+    .titleAndStars p{
+      font-size:11px;
+    }
+    img{
+      width:30vw;
+    }
+  }
+  @media (max-width: 670px) {
+    .card-section svg{
+      display:none;
+      
+    }
+    height:34vh;
+    .div3{
+      height:100%;
+      width:45vw;
+    }
+    button{
+      width:110px;
     }
   }
 
