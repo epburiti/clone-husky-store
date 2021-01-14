@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import {useDispatch, useSelector, connect } from 'react-redux';
-
+import { useDispatch, useSelector, connect } from "react-redux";
 
 import Slider from "@material-ui/core/Slider";
 import { withStyles } from "@material-ui/core/styles";
@@ -8,19 +7,25 @@ import { BsFilter, BsFillStarFill, BsHeart } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
 
 import { Container, Header, Body, Cards } from "./styles";
+import { formatPrice } from "./../../utils/format";
 import itens from "../../Assets/itens";
 
-import { updateAmount } from '../../actions/Cart';
+import * as CartActions from "../../store/module/Cart/actions";
+import * as ModalActions from "../../store/module/Modal/actions";
+import { bindActionCreators } from "redux";
 
-const Store: React.FC = () => {
+const Store: React.FC = (props: any) => {
   const [minValue, setMinValue] = useState(734.89);
   const [maxValue, setMaxValue] = useState(2644.87);
-  const cartSize = useSelector(state => state.cart.size)
 
   const handleChange = (event, newValue) => {
     setMinValue(newValue[0]);
     setMaxValue(newValue[1]);
   };
+  function handleModal() {
+    const { toggle } = props;
+    toggle();
+  }
 
   const PrettoSlider = withStyles({
     thumb: {
@@ -55,9 +60,11 @@ const Store: React.FC = () => {
   })(Slider);
 
   const dispatch = useDispatch();
-  const handleAddProduct = (product) =>{
-    dispatch(updateAmount(product.id, product));
-  }
+  const handleAddProduct = (product) => {
+    const { addToCartRequest } = props;
+    console.log("product: ", product);
+    addToCartRequest(product.id);
+  };
 
   return (
     <Container>
@@ -133,10 +140,10 @@ const Store: React.FC = () => {
                   <p>{element.title}</p>
                   <div className="stars">
                     {(() => {
-                      const icones = [<BsFillStarFill/>];
+                      const icones = [<BsFillStarFill />];
 
                       for (let i = 1; i < element.stars; i++) {
-                        icones.push(<BsFillStarFill/>);
+                        icones.push(<BsFillStarFill />);
                       }
 
                       return icones;
@@ -145,13 +152,21 @@ const Store: React.FC = () => {
                   </div>
                 </div>
                 <div className="div3">
-                  <p className="preco orange">{element.price}</p>
+                  <p className="preco orange">{formatPrice(element.price)}</p>
                   <p className="p">
                     <strong>Valor à vista no boleto</strong>
                     ou até {element.plots}x de R$ {element.valOfProts} sem juros
                   </p>
                   <div className="card-section">
-                    <button className="button" onClick={()=>handleAddProduct(element)}>COMPRAR</button>
+                    <button
+                      className="button"
+                      onClick={() => {
+                        handleAddProduct(element);
+                        handleModal();
+                      }}
+                    >
+                      COMPRAR
+                    </button>
                     <FaShoppingCart />
                     <BsHeart />
                   </div>
@@ -164,5 +179,7 @@ const Store: React.FC = () => {
     </Container>
   );
 };
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(Object.assign({}, CartActions, ModalActions), dispatch);
 
-export default connect()(Store);
+export default connect(null, mapDispatchToProps)(Store);

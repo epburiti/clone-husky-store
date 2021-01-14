@@ -1,5 +1,5 @@
-import React from 'react';
-import {Provider} from 'react-redux';
+import React from "react";
+import { Provider } from "react-redux";
 
 // import Routes from './routes';
 import GlobalStyles from "./styles/GlobalStyle";
@@ -10,18 +10,15 @@ import Footer from "./Components/Footer/index";
 
 import store from "./store";
 
-
-
 function App() {
   return (
     <Provider store={store}>
-      <Header/>
-      <SearchBar/>
-      <Store/>
+      <Header />
+      <SearchBar />
+      <Store />
       {/* <Routes/> */}
-      <Footer/>
-      <GlobalStyles/>
-
+      <Footer />
+      <GlobalStyles />
     </Provider>
   );
 }
