@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { useSelector, connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Container, CardProduct, CustomInput } from "./styles";
 import {
   AiOutlineClose,
@@ -8,33 +7,44 @@ import {
   AiFillMinusCircle,
   AiFillCloseCircle,
 } from "react-icons/ai";
-import * as CartActions from "../../store/module/Cart/actions";
-import * as ModalActions from "../../store/module/Modal/actions";
+import * as CartActions from "../../store/ducks/Cart/actions";
+import * as ModalActions from "../../store/ducks/Modal/actions";
 import { formatPrice } from "./../../utils/format";
 
-const SearchBar = ({
-  cart,
-  total,
-  parcial,
-  updateAmount,
-  toggle,
-  removeFromCart,
-}) => {
-  const visibleModal = useSelector((state) => state.modal);
-  const cartItems = useSelector((state) => state.cart);
+export default function SearchBar() {
+  const cart = useSelector((state) =>
+    state.cart.map((product) => ({
+      ...product,
+      subTotal: product.price * product.amount,
+    }))
+  );
+  const total = useSelector((state) =>
+    state.cart.reduce((total, product) => {
+      return total + product.price * product.amount;
+    }, 0)
+  );
+  const parcial = useSelector((state) =>
+    state.cart.reduce((total, product) => {
+      return total + (product.price * product.amount) / 12;
+    }, 0)
+  );
 
+  const dispatch = useDispatch();
   useEffect(() => {}, []);
   function incrementAmount(params) {
-    updateAmount(params.id, params.amount + 1);
+    dispatch(CartActions.updateAmount(params.id, params.amount + 1));
   }
   function decrementAmount(params) {
-    updateAmount(params.id, params.amount - 1);
+    dispatch(CartActions.updateAmount(params.id, params.amount - 1));
   }
   function handleModal() {
-    toggle();
+    dispatch(ModalActions.toggle());
   }
   function handleRemoveProduct(id) {
-    removeFromCart(id);
+    dispatch(CartActions.removeFromCart(id));
+  }
+  function handleClearCart() {
+    dispatch(CartActions.clearCartRequest());
   }
   return (
     <>
@@ -97,12 +107,12 @@ const SearchBar = ({
           <div>
             <p className="total">
               TOTAL
-              <strong className="price">R$ {total}</strong>
+              <strong className="price">R$ {formatPrice(total)}</strong>
             </p>
             <p className="text-right">À VISTA NO BOLETO</p>
             <p className="text-right">
               OU EM 12X DE
-              <strong>{parcial}</strong>
+              <strong>{formatPrice(parcial)}</strong>
               SEM JUROS
             </p>
           </div>
@@ -112,7 +122,7 @@ const SearchBar = ({
             <button type="button" className="orange">
               Finalizar compra
             </button>
-            <button type="button" className="light">
+            <button type="button" className="light" onClick={handleClearCart}>
               Limpar carrinho
             </button>
           </div>
@@ -120,22 +130,4 @@ const SearchBar = ({
       </Container>
     </>
   );
-};
-
-const mapStateToProps = (state) => ({
-  cart: state.cart.map((product) => ({
-    ...product,
-    subTotal: product.price * product.amount,
-  })),
-  total: state.cart.reduce((total, product) => {
-    return formatPrice(total + product.price * product.amount);
-  }, 0),
-  parcial: state.cart.reduce((total, product) => {
-    return formatPrice(total + (product.price * product.amount) / 12);
-  }, 0),
-});
-
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(Object.assign({}, CartActions, ModalActions), dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+}

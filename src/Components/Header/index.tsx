@@ -1,22 +1,18 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
 import { BsPeopleCircle, BsFillHeartFill } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Modal from "./../Modal";
 import { Container, NavBar, NavBarResponsiva } from "./styles";
-
+import * as ModalActions from "../../store/ducks/Modal/actions";
 import top_logo from "../../Assets/top_logo.png";
 
-const Header: React.FC = (props: any) => {
+export default function Header(props) {
   const visibleModal = useSelector((state) => state.modal);
   const cartSize = useSelector((state) => state.cart.length);
-
+  const dispatch = useDispatch();
   function handleModal() {
-    const { dispatch } = props;
-    dispatch({
-      type: "toggle_modal",
-    });
+    dispatch(ModalActions.toggle());
   }
   return (
     <>
@@ -87,6 +83,4 @@ const Header: React.FC = (props: any) => {
       {visibleModal && <Modal />}
     </>
   );
-};
-
-export default connect()(Header);
+}

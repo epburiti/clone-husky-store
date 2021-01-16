@@ -27,12 +27,17 @@ export default function cart(state = INITIAL_STATE, action: any) {
     }
     case "UPDATE_AMOUNT": {
       return produce(state, (draft: any) => {
-        console.log(action);
         const productIndex = draft.findIndex((p) => p.id === action.id);
         if (productIndex >= 0) {
           draft[productIndex].amount = action.amount;
         }
         console.log(state);
+      });
+    }
+    case "CLEAR_CART": {
+      return produce(state, (draft: any) => {
+        console.log(action);
+        return action.data;
       });
     }
     default:

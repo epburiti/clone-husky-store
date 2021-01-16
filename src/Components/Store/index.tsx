@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector, connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Slider from "@material-ui/core/Slider";
 import { withStyles } from "@material-ui/core/styles";
@@ -10,21 +10,20 @@ import { Container, Header, Body, Cards } from "./styles";
 import { formatPrice } from "./../../utils/format";
 import itens from "../../Assets/itens";
 
-import * as CartActions from "../../store/module/Cart/actions";
-import * as ModalActions from "../../store/module/Modal/actions";
+import * as CartActions from "../../store/ducks/Cart/actions";
+import * as ModalActions from "../../store/ducks/Modal/actions";
 import { bindActionCreators } from "redux";
 
-const Store: React.FC = (props: any) => {
+export default function Store() {
   const [minValue, setMinValue] = useState(734.89);
   const [maxValue, setMaxValue] = useState(2644.87);
-
+  const dispatch = useDispatch();
   const handleChange = (event, newValue) => {
     setMinValue(newValue[0]);
     setMaxValue(newValue[1]);
   };
   function handleModal() {
-    const { toggle } = props;
-    toggle();
+    dispatch(ModalActions.toggle());
   }
 
   const PrettoSlider = withStyles({
@@ -59,11 +58,8 @@ const Store: React.FC = (props: any) => {
     },
   })(Slider);
 
-  const dispatch = useDispatch();
   const handleAddProduct = (product) => {
-    const { addToCartRequest } = props;
-    console.log("product: ", product);
-    addToCartRequest(product.id);
+    dispatch(CartActions.addToCartRequest(product.id));
   };
 
   return (
@@ -178,8 +174,4 @@ const Store: React.FC = (props: any) => {
       </Body>
     </Container>
   );
-};
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(Object.assign({}, CartActions, ModalActions), dispatch);
-
-export default connect(null, mapDispatchToProps)(Store);
+}

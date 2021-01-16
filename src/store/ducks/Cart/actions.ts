@@ -24,3 +24,14 @@ export function updateAmount(id, amount) {
     amount,
   };
 }
+export function clearCartRequest() {
+  return {
+    type: "CLEAR_CART_REQUEST",
+  };
+}
+export function clearCartResponse(product) {
+  return {
+    type: "CLEAR_CART",
+    data: product,
+  };
+}

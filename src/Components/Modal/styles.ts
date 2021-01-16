@@ -86,6 +86,9 @@ export const Container = styled.div`
   width: 370px;
   right: 0;
   flex-direction: column !important;
+  @media (max-width: 500px) {
+    width: auto !important;
+  }
 
   .main {
     overflow: auto;
